@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商業施設フロアマップVR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="src/css/pannellum.css"/>
+
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; }
+        #container {
+            max-width: 1200px; /* フロアマップの最大幅 */
+            margin: 20px auto;
+            text-align: center;
+        }
+        #floor-map-wrapper {
+            position: relative;
+            display: inline-block; /* フロアマップのサイズに合わせる */
+        }
+        #floor-map {
+            width: 100%; /* 親要素に合わせて調整 */
+            height: auto;
+            display: block;
+            border: 1px solid #ccc;
+        }
+
+        /* ホットスポット（クリックする丸いマーク）のスタイル */
+        .hotspot {
+            position: absolute;
+            width: 25px; /* ホットスポットのサイズ */
+            height: 25px;
+            background-color: #ff0000; /* 赤色の丸 */
+            border-radius: 50%; /* 円形にする */
+            cursor: pointer; /* マウスカーソルが指マークになる */
+            border: 2px solid #ffffff; /* 白い枠 */
+            box-sizing: border-box; /* 枠線を含めてサイズを計算 */
+            opacity: 0.8; /* 少し透明にする */
+            transition: transform 0.2s; /* ホバー時のアニメーション */
+        }
+        .hotspot:hover {
+            transform: scale(1.2); /* ホバーで少し拡大 */
+        }
+
+        /* 各ホットスポットの位置 (フロアマップに合わせて調整する) */
+        #hotspot-entrance { top: 70%; left: 15%; }
+        #hotspot-hall { top: 40%; left: 50%; }
+        #hotspot-shop1 { top: 30%; left: 80%; }
+        /* 必要に応じてホットスポットのIDと位置を追加 */
+
+        #pano-viewer {
+            width: 100%;
+            height: 500px; /* 360°写真の表示エリアの高さ */
+            background-color: #e0e0e0; /* ロード中の背景色 */
+            margin-top: 30px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>商業施設フロアマップVR</h1>
+        <p>見たい場所の赤い丸をクリックしてください。</p>
+
+        <div id="floor-map-wrapper">
+            <img id="floor-map" src="floor_map.png" alt="フロアマップ">
+
+            <div class="hotspot" id="hotspot-entrance" data-pano-id="photo1.jpg" title="入口付近"></div>
+            <div class="hotspot" id="hotspot-hall" data-pano-id="photo2.jpg" title="中央ホール"></div>
+            <div class="hotspot" id="hotspot-shop1" data-pano-id="photo3.jpg" title="ショップA"></div>
+            </div>
+
+        <div id="pano-viewer">
+            <p style="padding-top: 200px;">フロアマップの丸をクリックすると、ここに360°写真が表示されます。</p>
+        </div>
+    </div>
+
+    <script src="src/js/pannellum.js"></script>
+
+    <script>
+        // JavaScriptのコードをここに書きます
+        const hotspots = document.querySelectorAll('.hotspot'); // すべてのホットスポットを取得
+        const panoViewer = document.getElementById('pano-viewer'); // 360°写真の表示エリア
+
+        let currentPanoViewer = null; // 現在表示中のPannellumインスタンスを保持する変数
+
+        hotspots.forEach(hotspot => {
+            hotspot.addEventListener('click', function() {
+                const panoId = this.dataset.panoId; // クリックされたホットスポットの写真ファイル名を取得
+
+                // 既にPannellumビューアがある場合は破棄する（重要）
+                if (currentPanoViewer) {
+                    currentPanoViewer.destroy();
+                    currentPanoViewer = null; // 破棄後にnullにする
+                }
+                
+                // 新しいPannellumビューアを生成して表示
+                currentPanoViewer = pannellum.viewer('pano-viewer', {
+                    "type": "equirectangular", // 360°写真のタイプ（RICOH THETAはこれ）
+                    "panorama": panoId,         // 表示する写真のファイル名 (例: "photo1.jpg")
+                    "autoLoad": true,           // 自動的に読み込みを開始
+                    "autoRotate": 0,            // 自動回転しない（したい場合は数字を増やす）
+                    "compass": true,            // コンパスを表示する
+                    "showZoom": true,           // ズームボタンを表示する
+                    "hfov": 100                 // 初期画角 (広いほど広く見える)
+                });
+            });
+        });
+
+        // 初期の表示（最初の写真を表示するなど）
+        // 例えば、ページ読み込み時に最初の写真を自動で表示したい場合
+        // currentPanoViewer = pannellum.viewer('pano-viewer', {
+        //     "type": "equirectangular",
+        //     "panorama": "photo1.jpg", // 最初の写真のファイル名
+        //     "autoLoad": true
+        // });
+
+    </script>
+
+</body>
+</html>
