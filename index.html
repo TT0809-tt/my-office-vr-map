@@ -10,12 +10,13 @@
     <style>
         body { margin: 0; padding: 0; font-family: sans-serif; }
         #container {
-            max-width: 1200px; /* フロアマップの最大幅 */
-            margin: 20px auto;
-            text-align: center;
+            max-width: 1200px; /* 全体の最大幅 */
+            margin: 20px auto; /* 上下に20px余白、左右中央寄せ */
+            text-align: center; /* コンテンツを中央寄せ */
             padding: 10px;
-            box-sizing: border-box; /* パディングを含めてサイズを計算 */
+            box-sizing: border-box;
         }
+
         #floor-map-wrapper {
             position: relative;
             display: inline-block; /* フロアマップのサイズに合わせる */
@@ -50,8 +51,7 @@
             transform: scale(1.2); /* ホバーで少し拡大 */
         }
 
-        /* 各ホットスポットの位置 (フロアマップに合わせて調整する) */
-        /* 例として10箇所程度の適当な位置を設定しています。すべて調整してください！ */
+        /* 各ホットスポットの位置 (頂いた位置に設定) */
         #hotspot-1 { top: 30%; left: 95%; }
         #hotspot-2 { top: 25%; left: 88%; }
         #hotspot-3 { top: 44%; left: 22%; }
@@ -72,7 +72,7 @@
         #hotspot-18 { top: 14%; left: 50%; }
         #hotspot-19 { top: 14%; left: 44%; }
         #hotspot-20 { top: 14%; left: 40%; }
-        #hotspot-21 { top: 11%; left: 38%; } /* 例外的な位置調整の追加 */
+        #hotspot-21 { top: 11%; left: 38%; }
         #hotspot-22 { top: 9%; left: 38%; }
         #hotspot-23 { top: 9%; left: 41%; }
         #hotspot-24 { top: 25%; left: 85%; }
@@ -82,7 +82,7 @@
             width: 100%;
             height: 500px; /* 360°写真の表示エリアの高さ */
             background-color: #e0e0e0; /* ロード中の背景色 */
-            margin-top: 30px;
+            margin-bottom: 30px; /* 写真エリアの下に余白 */
             border: 1px solid #ccc;
         }
     </style>
@@ -92,6 +92,10 @@
     <div id="container">
         <h1>商業施設フロアマップVR</h1>
         <p>見たい場所の赤い丸をクリックしてください。</p>
+
+        <div id="pano-viewer">
+            <p style="padding-top: 200px;">フロアマップの丸をクリックすると、ここに360°写真が表示されます。</p>
+        </div>
 
         <div id="floor-map-wrapper">
             <img id="floor-map" src="floor_map.png" alt="フロアマップ">
@@ -121,11 +125,6 @@
             <div class="hotspot" id="hotspot-23" data-pano-id="photo23.jpg" title="場所23">23</div>
             <div class="hotspot" id="hotspot-24" data-pano-id="photo24.jpg" title="場所24">24</div>
 
-
-        </div>
-
-        <div id="pano-viewer">
-            <p style="padding-top: 200px;">フロアマップの丸をクリックすると、ここに360°写真が表示されます。</p>
         </div>
     </div>
 
