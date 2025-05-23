@@ -5,7 +5,7 @@
     <title>商業施設フロアマップVR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="src/css/pannellum.css"/>
+    <link rel="stylesheet" href="pannellum.css"/>
 
     <style>
         body { margin: 0; padding: 0; font-family: sans-serif; }
@@ -13,6 +13,8 @@
             max-width: 1200px; /* フロアマップの最大幅 */
             margin: 20px auto;
             text-align: center;
+            padding: 10px;
+            box-sizing: border-box; /* パディングを含めてサイズを計算 */
         }
         #floor-map-wrapper {
             position: relative;
@@ -37,16 +39,46 @@
             box-sizing: border-box; /* 枠線を含めてサイズを計算 */
             opacity: 0.8; /* 少し透明にする */
             transition: transform 0.2s; /* ホバー時のアニメーション */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px; /* 番号のフォントサイズ */
+            color: white; /* 番号の色 */
+            font-weight: bold;
         }
         .hotspot:hover {
             transform: scale(1.2); /* ホバーで少し拡大 */
         }
 
         /* 各ホットスポットの位置 (フロアマップに合わせて調整する) */
-        #hotspot-entrance { top: 70%; left: 15%; }
-        #hotspot-hall { top: 40%; left: 50%; }
-        #hotspot-shop1 { top: 30%; left: 80%; }
-        /* 必要に応じてホットスポットのIDと位置を追加 */
+        /* 例として10箇所程度の適当な位置を設定しています。すべて調整してください！ */
+        #hotspot-1 { top: 15%; left: 10%; }
+        #hotspot-2 { top: 20%; left: 25%; }
+        #hotspot-3 { top: 10%; left: 40%; }
+        #hotspot-4 { top: 30%; left: 55%; }
+        #hotspot-5 { top: 25%; left: 70%; }
+        #hotspot-6 { top: 40%; left: 15%; }
+        #hotspot-7 { top: 45%; left: 30%; }
+        #hotspot-8 { top: 35%; left: 45%; }
+        #hotspot-9 { top: 50%; left: 60%; }
+        #hotspot-10 { top: 45%; left: 75%; }
+        #hotspot-11 { top: 60%; left: 10%; }
+        #hotspot-12 { top: 65%; left: 25%; }
+        #hotspot-13 { top: 55%; left: 40%; }
+        #hotspot-14 { top: 70%; left: 55%; }
+        #hotspot-15 { top: 65%; left: 70%; }
+        #hotspot-16 { top: 80%; left: 15%; }
+        #hotspot-17 { top: 85%; left: 30%; }
+        #hotspot-18 { top: 75%; left: 45%; }
+        #hotspot-19 { top: 90%; left: 60%; }
+        #hotspot-20 { top: 85%; left: 75%; }
+        #hotspot-21 { top: 5%; left: 85%; } /* 例外的な位置調整の追加 */
+        #hotspot-22 { top: 95%; left: 5%; }
+        #hotspot-23 { top: 50%; left: 5%; }
+        #hotspot-24 { top: 5%; left: 5%; }
+        #hotspot-25 { top: 95%; left: 85%; }
+        #hotspot-26 { top: 50%; left: 95%; }
+
 
         #pano-viewer {
             width: 100%;
@@ -66,20 +98,43 @@
         <div id="floor-map-wrapper">
             <img id="floor-map" src="floor_map.png" alt="フロアマップ">
 
-            <div class="hotspot" id="hotspot-entrance" data-pano-id="photo1.jpg" title="入口付近"></div>
-            <div class="hotspot" id="hotspot-hall" data-pano-id="photo2.jpg" title="中央ホール"></div>
-            <div class="hotspot" id="hotspot-shop1" data-pano-id="photo3.jpg" title="ショップA"></div>
-            </div>
+            <div class="hotspot" id="hotspot-1" data-pano-id="photo1.jpg" title="場所1">1</div>
+            <div class="hotspot" id="hotspot-2" data-pano-id="photo2.jpg" title="場所2">2</div>
+            <div class="hotspot" id="hotspot-3" data-pano-id="photo3.jpg" title="場所3">3</div>
+            <div class="hotspot" id="hotspot-4" data-pano-id="photo4.jpg" title="場所4">4</div>
+            <div class="hotspot" id="hotspot-5" data-pano-id="photo5.jpg" title="場所5">5</div>
+            <div class="hotspot" id="hotspot-6" data-pano-id="photo6.jpg" title="場所6">6</div>
+            <div class="hotspot" id="hotspot-7" data-pano-id="photo7.jpg" title="場所7">7</div>
+            <div class="hotspot" id="hotspot-8" data-pano-id="photo8.jpg" title="場所8">8</div>
+            <div class="hotspot" id="hotspot-9" data-pano-id="photo9.jpg" title="場所9">9</div>
+            <div class="hotspot" id="hotspot-10" data-pano-id="photo10.jpg" title="場所10">10</div>
+            <div class="hotspot" id="hotspot-11" data-pano-id="photo11.jpg" title="場所11">11</div>
+            <div class="hotspot" id="hotspot-12" data-pano-id="photo12.jpg" title="場所12">12</div>
+            <div class="hotspot" id="hotspot-13" data-pano-id="photo13.jpg" title="場所13">13</div>
+            <div class="hotspot" id="hotspot-14" data-pano-id="photo14.jpg" title="場所14">14</div>
+            <div class="hotspot" id="hotspot-15" data-pano-id="photo15.jpg" title="場所15">15</div>
+            <div class="hotspot" id="hotspot-16" data-pano-id="photo16.jpg" title="場所16">16</div>
+            <div class="hotspot" id="hotspot-17" data-pano-id="photo17.jpg" title="場所17">17</div>
+            <div class="hotspot" id="hotspot-18" data-pano-id="photo18.jpg" title="場所18">18</div>
+            <div class="hotspot" id="hotspot-19" data-pano-id="photo19.jpg" title="場所19">19</div>
+            <div class="hotspot" id="hotspot-20" data-pano-id="photo20.jpg" title="場所20">20</div>
+            <div class="hotspot" id="hotspot-21" data-pano-id="photo21.jpg" title="場所21">21</div>
+            <div class="hotspot" id="hotspot-22" data-pano-id="photo22.jpg" title="場所22">22</div>
+            <div class="hotspot" id="hotspot-23" data-pano-id="photo23.jpg" title="場所23">23</div>
+            <div class="hotspot" id="hotspot-24" data-pano-id="photo24.jpg" title="場所24">24</div>
+            <div class="hotspot" id="hotspot-25" data-pano-id="photo25.jpg" title="場所25">25</div>
+            <div class="hotspot" id="hotspot-26" data-pano-id="photo26.jpg" title="場所26">26</div>
+
+        </div>
 
         <div id="pano-viewer">
             <p style="padding-top: 200px;">フロアマップの丸をクリックすると、ここに360°写真が表示されます。</p>
         </div>
     </div>
 
-    <script src="src/js/pannellum.js"></script>
+    <script src="pannellum.js"></script>
 
     <script>
-        // JavaScriptのコードをここに書きます
         const hotspots = document.querySelectorAll('.hotspot'); // すべてのホットスポットを取得
         const panoViewer = document.getElementById('pano-viewer'); // 360°写真の表示エリア
 
@@ -108,13 +163,15 @@
             });
         });
 
-        // 初期の表示（最初の写真を表示するなど）
-        // 例えば、ページ読み込み時に最初の写真を自動で表示したい場合
-        // currentPanoViewer = pannellum.viewer('pano-viewer', {
-        //     "type": "equirectangular",
-        //     "panorama": "photo1.jpg", // 最初の写真のファイル名
-        //     "autoLoad": true
-        // });
+        // オプション: ページ読み込み時に最初の写真を自動で表示したい場合
+        // この部分のコメントアウト（//）を外すと有効になります
+        /*
+        currentPanoViewer = pannellum.viewer('pano-viewer', {
+            "type": "equirectangular",
+            "panorama": "photo1.jpg", // 最初の写真のファイル名
+            "autoLoad": true
+        });
+        */
 
     </script>
 
